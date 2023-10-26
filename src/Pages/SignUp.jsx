@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Appbar from "../Components/Navbar/Navbar.jsx";
 import styles from "./Pages.module.css";
 import {AiOutlineMail} from "react-icons/ai"
@@ -7,7 +7,27 @@ import {BsFillTelephoneFill} from "react-icons/bs"
 import {FaUserAlt} from 'react-icons/fa'
 import {IoMdMail} from "react-icons/io"
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {usersignup} from "../Slices/SignUpSlice.jsx"
+
 const Login = () => {
+  const[name,setName] = useState("")
+  const[email,setEmail] = useState("")
+  const[phone,setPhone] = useState("")
+  const[password,setPassword] = useState("")
+
+
+  const dispatch = useDispatch()
+  const signDetails = {
+    name,
+    email,
+    phone,
+    password
+  }
+  const signUpData = ()=>[
+    dispatch(usersignup(signDetails))
+  ]
+
     const redirect = useNavigate()
   const gotoLogin = ()=>{
     redirect('/')
@@ -28,10 +48,12 @@ const Login = () => {
                       <FaUserAlt  className={`${styles.loginIcon} relative`}/>
                     </span>
                   <input
-                    type="email"
+                    type="string"
                     className={`${styles.signupinput} form-control` }
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
+                    value={name}
+                    onChange={(e)=> setName(e.target.value)}
                     />
                  
                 </div>
@@ -44,9 +66,11 @@ const Login = () => {
                     </span>
                   <input
                     type="email"
-                    className="form-control "
+                    className={`${styles.signupinput} form-control` }
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
+                    value={email}
+                    onChange={(e)=> setEmail(e.target.value)}
                     />
                  
                 </div>
@@ -59,9 +83,11 @@ const Login = () => {
                     </span>
                   <input
                     type="email"
-                    className="form-control "
+                    className={`${styles.signupinput} form-control` }
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
+                    value={phone}
+                    onChange={(e)=> setPhone(e.target.value)}
                     />
                  
                   <div id="emailHelp" className="form-text"></div>
@@ -70,26 +96,22 @@ const Login = () => {
                   <label htmlFor="exampleInputPassword1" className={`${styles.label} form-label fs-5  fw-bold`}>
                     Password
                   </label>
-                  <span >
+                  <span  >
                       <RiLockPasswordFill className={`${styles.loginIcon} relative`}/>
                     </span>
                   <input
                     type="password"
-                    className="form-control"
+                    className={`${styles.signupinput} ${styles.signpassInput} form-control` }
                     id="exampleInputPassword1"
+                    value={password}
+                    onChange={(e)=> setPassword(e.target.value)}
                   />
                 </div>
-                <div className=" form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="exampleCheck1"
-                  />
-                
-                </div>
+               
                 <button
                   type="submit"
-                  className={` ${styles.loginBtn} btn text-light mb-2 fw-bold fs-4 w-100 bg-purple-900`}
+                  className={` ${styles.loginBtn} btn text-light  mt-4 mb-2 fw-bold fs-4 w-100 bg-purple-900`}
+                  onClick={()=> signUpData()}
                 >
                   SignUp
                 </button>

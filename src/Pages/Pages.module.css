@@ -1,3 +1,10 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
 .login{
     height: 100vh;
     width: 100%;
@@ -14,7 +21,6 @@
 }
 .label{
     color:  #581c87;
-    margin-bottom: 0px !important;
     margin-top: 2px !important;
 
 }
@@ -29,6 +35,7 @@
 .loginBtn:hover{
     background-color: #581c87;
 }
+
 .loginIcon{
     top: 35px !important;
     left: 10px !important;
@@ -41,10 +48,90 @@
 }
 .signupinput{
 margin-bottom: 2px !important;
+padding-left: 60px !important;
 }
 .form{
     margin-top: 0px !important;
 }
 .loginText{
     color: #581c87 !important;
+}
+.signpassInput{
+    margin-bottom: 5px !important;
+}
+.loginInput{
+    padding-left: 60px !important;
+}
+.head{
+    background-color: whitesmoke;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+
+}
+.image{
+        background-image: url('https://media.istockphoto.com/id/1416048929/photo/woman-working-on-laptop-online-checking-emails-and-planning-on-the-internet-while-sitting-in.webp?b=1&s=170667a&w=0&k=20&c=XCzSqjgn02etddi527fy6Q9Dz_MtPYKKc-MMbhS3kK0=');
+        height: 300px;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: contain;
+        width: 90%;
+
+}
+.heading{
+    position: absolute;
+    color: black   ;
+     text-shadow: 10px 2px solid red;
+    flex: 3;
+    font-weight: bold;
+
+    top: 90px ;
+    left: 12%;
+    font-size: 35px;
+
+}
+.heading1{
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 45px;
+
+}
+.container{
+    width: 80% !important;
+}
+input{
+    width: 50%px;
+    height: 40px;
+    border: 1px solid black;
+ }
+ .mainform{
+    
+    /* background: lightgreen; */
+    vertical-align: center;
+    justify-content: space-between;
+ }
+ .mainform > div > input{
+    width: 100% !important;
+    padding-left: 50px;
+
+    /* margin: 0p auto !important; */
+    /* margin: auto !important;  */
+ 
+} 
+
+.parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* .mainInputContainer{
+    margin: 0px auto ;
+    width: 100%;
+} */
+.imgageDiv{
+    height: 180px;
+    border-radius: 50%;
+    width: 180px;
+    border: 5px solid yellow;
+
 }

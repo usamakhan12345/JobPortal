@@ -14,31 +14,50 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import styles from '../../Components/Components.module.css'
+import { useNavigate } from 'react-router-dom';
 
 
 
 const drawerWidth = 240;
-const navItems = [];
 
 export default function DrawerAppBar(props) {
+  const navItems = [ props.postjob , props.myjob , props.profile , props.postJob];
+
+  const redirect = useNavigate()
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+  const UserLogOut = ()=>{
+      redirect("/")
+  }
 
+  const navbarOptions = (item)=>{
+      console.log(item)
+      if(item === 'All Jobs'){
+        redirect('/myjobs')
+      }
+      if(item === 'Post Job'){
+        redirect('/postjob')
+      }
+      if(item === 'Profile'){
+        redirect('/profile')
+      }
+  }
+    {console.log(props.head)}
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-          Job Portal
+      <Typography  variant="h6" sx={{ my: 2 }}>
+          {props.head ? props.head : 'Job Portal'}
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+        {navItems.map((item,i) => (
+          <ListItem key={i} disablePadding>
+            <ListItemButton key={i} sx={{ textAlign: 'center' }}>
+              <ListItemText key={i} primary={item} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -62,21 +81,41 @@ export default function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
+          <Box className={styles.navbarBox} sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {navItems.map((item , i) => (
+              <Button  className={ `fw-bold fs-5`} onClick={()=> navbarOptions(item)} key={i} sx={{ color: '#fff' }}>
+                {item}
+              </Button>
+            ))}
+          </Box>
+          {/* <Typography
+            variant="h5"
+            component="div"
+            className= {styles}
+            sx={{  display: { xs: 'none', sm: 'block' }}}
+            
+            >
+            Post Job 
+          </Typography> */}
           <Typography
             variant="h6"
             component="div"
             className= {styles.logo}
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block'}}}
-          >
-            Job Portal
+            
+            >
+                      {props.head ? props.head : 'Job Portal'}
+
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
+          <Typography
+            variant="h5"
+            component="div"
+            className= {styles}
+            sx={{  display: { xs: 'none', sm: 'block' }}}
+            
+            >
+              <button onClick={()=>UserLogOut()}>Log out</button>
+          </Typography>
         </Toolbar>
       </AppBar>
       <nav>
