@@ -47,17 +47,16 @@ const Login = () => {
                     </span>
                   <input
                     type="email"
-                    className={`${styles.loginInput} form-control mb-3`}
+                    className={`${styles.loginInput} form-control`}
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={email}
                     onChange={(e)=> setEmail(e.target.value)}
                     />
                  
-                  <div id="emailHelp" className="form-text"></div>
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="exampleInputPassword1" className={`${styles.label} form-label fs-5 mb-3 fw-bold`}>
+                <div className="mb-2">
+                  <label htmlFor="exampleInputPassword1" className={`${styles.label} form-label fs-5  fw-bold`}>
                     Password
                   </label>
                   <span >
@@ -65,7 +64,7 @@ const Login = () => {
                     </span>
                   <input
                     type="password"
-                    className={`${styles.loginInput} form-control mb-3`}
+                    className={`${styles.loginInput} form-control `}
                     id="exampleInputPassword1"
                     value={password}
                     onChange={(e)=> setPassword(e.target.value)}

@@ -114,7 +114,7 @@ export default function DrawerAppBar(props) {
             sx={{  display: { xs: 'none', sm: 'block' }}}
             
             >
-              <button onClick={()=>UserLogOut()}>Log out</button>
+              <button onClick={()=>UserLogOut()}>{props.login}</button>
           </Typography>
         </Toolbar>
       </AppBar>

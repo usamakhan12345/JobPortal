@@ -40,10 +40,13 @@ const Login = () => {
           <div className="row justify-content-center d-flex">
             <div className="col-md-6 ">
               <form className={`${styles.form}`}>
-                <div className="">
+                <div>
+                  <div >
+
                   <label htmlFor="exampleInputEmail1" className={`${styles.label} form-label fs-5 fw-bold`}>
                     Full Name
                   </label>
+                  </ div>
                   <span  >
                       <FaUserAlt  className={`${styles.loginIcon} relative`}/>
                     </span>
@@ -58,6 +61,7 @@ const Login = () => {
                  
                 </div>
                 <div className=" mt-1">
+                  
                   <label htmlFor="exampleInputEmail1" className={`${styles.label} form-label fs-5 fw-bold`}>
                     Email
                   </label>

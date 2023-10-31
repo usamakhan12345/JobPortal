@@ -21,23 +21,17 @@ body{
 }
 .label{
     color:  #581c87;
-    margin-top: 2px !important;
+    /* margin-top: 2px !important; */
 
 }
 
-@media screen and (max-width: 778px) {
-    /* CSS rules for screens with a maximum width of 768px or less */
-    .loginpic{
-        background-image:none;
-    }
-  }
 
 .loginBtn:hover{
     background-color: #581c87;
 }
 
 .loginIcon{
-    top: 35px !important;
+    top: 25px !important;
     left: 10px !important;
     font-size: 30px !important;
     color: #581c87;
@@ -47,7 +41,7 @@ body{
 
 }
 .signupinput{
-margin-bottom: 2px !important;
+margin-bottom: 12px !important;
 padding-left: 60px !important;
 }
 .form{
@@ -61,7 +55,10 @@ padding-left: 60px !important;
 }
 .loginInput{
     padding-left: 60px !important;
+    margin-top: -10px !important;
+    margin-bottom: 30px;
 }
+
 .head{
     background-color: whitesmoke;
     display: flex;
@@ -131,7 +128,75 @@ input{
 .imgageDiv{
     height: 180px;
     border-radius: 50%;
+    position: relative;
+    box-sizing: border-box;
     width: 180px;
-    border: 5px solid yellow;
+    border: 5px solid #581c87;
 
+}
+.cameraIcon{
+    position: absolute;
+    bottom: -40px;
+    left: 40%;
+    color:  #581c87;
+    font-size: 35px;
+    cursor: pointer;
+}
+.cameraIcon:active{
+    opacity: 0.5;
+}
+.profileInput{
+    width: 400px;
+}
+.profileInput > input {
+    width: 100%;
+    padding-left: 50px;
+    border-color:  #581c87;
+    border-width: 2px;
+}
+.profileInput > input:focus{
+    outline-color: #581c87;
+}
+.profileIcon{
+    font-size: 30px;
+    left: 40px;
+    top: 5px;
+    color: #581c87;
+}
+.updateBtn{
+    background-color :#581c87 ;
+    color : whitesmoke;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 18px;
+}
+.imageInput{
+    display: none;
+}
+.profilePic{
+    border-radius: 50%;
+   height: 190px;
+       width: 190px;
+       position: relative;
+       top: -8px;
+       object-fit: fill;
+}
+
+
+@media screen and (max-width: 778px) {
+    /* CSS rules for screens with a maximum width of 768px or less */
+    .loginpic{
+        background-image:none;
+    }
+  }
+@media screen and (max-width : 350px){
+    .profileInput > input{
+        width: 100%;
+        margin-left: 0px;
+        justify-content: start;
+    }
+    .profileIcon{
+        font-size: 20px;
+        top: 10px;
+    }
 }
