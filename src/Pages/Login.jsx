@@ -5,9 +5,8 @@ import {AiOutlineMail} from "react-icons/ai"
 import { RiLockPasswordFill} from "react-icons/ri"
 import { useNavigate } from "react-router-dom";
 import {IoMdMail} from "react-icons/io"
+import axios from "axios";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {userLogin}  from "../Slices/UserDetail.jsx"
 
 
 const Login = () => {
@@ -15,15 +14,23 @@ const Login = () => {
   const[password,setPassword] = useState("")
 
   const redirect = useNavigate()
-  const dispatch = useDispatch()
-
-  const sendLoginData = ()=>{
-    const loginDetails = {
-      email,
-      password
-    }
-    console.log(loginDetails)
-    dispatch(userLogin(loginDetails))
+  const loginDetails = {
+    email,
+    password
+  }
+  const Userlogin = ()=>{
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/user/login",
+      data:{
+       ...loginDetails
+      }
+    })
+    .then((res)=> {
+        console.log(res)
+        redirect('/profile')
+    })
+    .catch((err)=> console.log(err))
 
 
   }
@@ -37,7 +44,7 @@ const Login = () => {
         <div className="container">
           <div className="row justify-content-center d-flex">
             <div className="col-md-6 ">
-              <form>
+              <div>
                 <div className=" mt-5">
                   <label htmlFor="exampleInputEmail1" className={`${styles.label} form-label fs-5 fw-bold`}>
                     Email address
@@ -48,7 +55,6 @@ const Login = () => {
                   <input
                     type="email"
                     className={`${styles.loginInput} form-control`}
-                    id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={email}
                     onChange={(e)=> setEmail(e.target.value)}
@@ -65,7 +71,6 @@ const Login = () => {
                   <input
                     type="password"
                     className={`${styles.loginInput} form-control `}
-                    id="exampleInputPassword1"
                     value={password}
                     onChange={(e)=> setPassword(e.target.value)}
                   />
@@ -74,7 +79,6 @@ const Login = () => {
                   <input
                     type="checkbox"
                     className="form-check-input mb-3"
-                    id="exampleCheck1"
                   />
                   <label className={`${styles.label} form-check-label mb-3 fw-bold`} htmlFor="exampleCheck1">
                     Check me out
@@ -83,14 +87,14 @@ const Login = () => {
                 <button
                   type="submit"
                   className={` ${styles.loginBtn} btn text-light mb-3 fw-bold fs-4 w-100 bg-purple-900`}
-                  onClick={()=> sendLoginData()}
+                  onClick={()=> Userlogin()}
                 >
                   Login
                 </button>
                 <div>
                     <h5 className={` ${styles.loginText} fw-bold text-light fs-4 text-center`}>Don't have an account ?  <span><button onClick={()=> gotoSignUp()} className="bg-purple-900 text-light px-3 py-1">Sign Up</button></span></h5>
                 </div>
-              </form>
+              </div>
             </div>
         
 

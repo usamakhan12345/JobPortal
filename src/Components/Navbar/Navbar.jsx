@@ -110,7 +110,7 @@ export default function DrawerAppBar(props) {
           <Typography
             variant="h5"
             component="div"
-            className= {styles}
+            // className= {styles}
             sx={{  display: { xs: 'none', sm: 'block' }}}
             
             >

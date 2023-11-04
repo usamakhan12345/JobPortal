@@ -8,6 +8,7 @@ import {FaUserAlt} from 'react-icons/fa'
 import {IoMdMail} from "react-icons/io"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import axios from 'axios' ; 
 import {usersignup} from "../Slices/SignUpSlice.jsx"
 
 const Login = () => {
@@ -15,7 +16,7 @@ const Login = () => {
   const[email,setEmail] = useState("")
   const[phone,setPhone] = useState("")
   const[password,setPassword] = useState("")
-
+  const redirect = useNavigate()
 
   const dispatch = useDispatch()
   const signDetails = {
@@ -24,14 +25,25 @@ const Login = () => {
     phone,
     password
   }
-  const signUpData = ()=>[
-    dispatch(usersignup(signDetails))
-  ]
-
-    const redirect = useNavigate()
-  const gotoLogin = ()=>{
-    redirect('/')
+  const signUpData = ()=>{
+      console.log("func is working")
+      console.log(signDetails)
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/user/signup",
+      data:{
+       ...signDetails
+      }
+    })
+    .then((res)=> {
+        console.log(res)
+        redirect('/')
+    })
+    .catch((err)=> console.log(err))
   }
+  
+
+  
   return (
     <>
       <div className={styles.login}>
@@ -39,7 +51,7 @@ const Login = () => {
         <div className="container">
           <div className="row justify-content-center d-flex">
             <div className="col-md-6 ">
-              <form className={`${styles.form}`}>
+              <div className={`${styles.form}`}>
                 <div>
                   <div >
 
@@ -53,7 +65,7 @@ const Login = () => {
                   <input
                     type="string"
                     className={`${styles.signupinput} form-control` }
-                    id="exampleInputEmail1"
+                    // id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={name}
                     onChange={(e)=> setName(e.target.value)}
@@ -71,7 +83,7 @@ const Login = () => {
                   <input
                     type="email"
                     className={`${styles.signupinput} form-control` }
-                    id="exampleInputEmail1"
+                    // id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={email}
                     onChange={(e)=> setEmail(e.target.value)}
@@ -86,9 +98,9 @@ const Login = () => {
                       <BsFillTelephoneFill className={`${styles.loginIcon} relative`}/>
                     </span>
                   <input
-                    type="email"
+                    type="text"
                     className={`${styles.signupinput} form-control` }
-                    id="exampleInputEmail1"
+                    // id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     value={phone}
                     onChange={(e)=> setPhone(e.target.value)}
@@ -106,14 +118,13 @@ const Login = () => {
                   <input
                     type="password"
                     className={`${styles.signupinput} ${styles.signpassInput} form-control` }
-                    id="exampleInputPassword1"
+                    // id="exampleInputPassword1"
                     value={password}
                     onChange={(e)=> setPassword(e.target.value)}
                   />
                 </div>
                
                 <button
-                  type="submit"
                   className={` ${styles.loginBtn} btn text-light  mt-4 mb-2 fw-bold fs-4 w-100 bg-purple-900`}
                   onClick={()=> signUpData()}
                 >
@@ -122,7 +133,7 @@ const Login = () => {
                 <div className="mb-3">
                     <h5 className= { `${styles.des} fw-bold  fs-4 text-center`}>Already have an account ?  <span><button onClick={()=>gotoLogin()} className="bg-purple-900 text-light px-3 py-1">Log in</button></span></h5>
                 </div>
-              </form>
+              </div>
             </div>
         
 

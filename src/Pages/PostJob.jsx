@@ -6,6 +6,7 @@ import Appbar from "../Components/Navbar/Navbar.jsx";
 const PostJob = () => {
   const[company,setCompany] = useState("")
   const[salary,setSalary] = useState("")
+  const[jobType,setJobType] = useState("")
   const[position,setPosition] = useState("")
   const[details,setDetails] = useState("")
   const[address,setAddress] = useState("")
@@ -16,7 +17,8 @@ const PostJob = () => {
         salary,
         position,
         details,
-        address
+        address,
+          jobType
       }
       console.log(JobDetails)
       setCompany("")
@@ -24,6 +26,7 @@ const PostJob = () => {
       setDetails("")
       setAddress("")
       setPosition("")
+      setJobType("")
     }
 
   return (
@@ -60,9 +63,13 @@ const PostJob = () => {
                   <div>
                 <input className='mb-4' value={position} onChange={(e)=> setPosition(e.target.value)} type="text" placeholder='ENTER JOB POSITION' />
                 </div>
+                <label className='fw-bold text-center ' htmlFor="">Job Type</label>
+                  <div>
+                <input className='mb-4'  value={jobType} onChange={(e)=> setJobType(e.target.value)} type="text" placeholder='Enter Job Type' />
+                </div>
                 <label className='fw-bold text-center ' htmlFor="">Salary</label>
                   <div>
-                <input className='mb-4'  value={salary} onChange={(e)=> setSalary(e.target.value)} type="text" placeholder='ENTER SALARY' />
+                <input className='mb-4'  value={salary} onChange={(e)=> setSalary(e.target.value)} type="text" placeholder='Rs 40,000 - Rs 90,0000 a month' />
                 </div>
                 <label className='fw-bold text-center ' htmlFor="">Details</label>
                   <div>
