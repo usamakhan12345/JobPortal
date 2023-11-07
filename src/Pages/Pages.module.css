@@ -213,7 +213,16 @@ input{
 .jobHead{
     color: #63189d;
 }
-
+.topHead{
+    justify-content:  center;
+    align-items: center;
+    position: absolute;
+    top: 10;
+    background-color: aliceblue;
+}
+.navbarBox{
+    position: relative;
+}
 @media screen and (max-width: 778px) {
     /* CSS rules for screens with a maximum width of 768px or less */
     .loginpic{

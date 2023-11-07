@@ -10,16 +10,26 @@
     color: yellow !important;
 
 }
-.navbarhead{
+.topHead{
     display: flex !important;
     justify-content: space-around !important;
+    align-items:  center !important;
+    width:  30;
+
+
 }
 .box{
     background-color: #581c87;
+    width:  30 !important;
 }
 .head{
     font-family:'Times New Roman', Times, serif;
 }
+
 .navbarBox{
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+
     float: left !important;
 }

@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import styles from '../../Components/Components.module.css'
+import style from '../../Pages/Pages.module.css'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -37,7 +38,7 @@ export default function DrawerAppBar(props) {
   const navbarOptions = (item)=>{
       console.log(item)
       if(item === 'All Jobs'){
-        redirect('/myjobs')
+        redirect('/alljobs')
       }
       if(item === 'Post Job'){
         redirect('/postjob')
@@ -81,9 +82,9 @@ export default function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Box className={styles.navbarBox} sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box className={`${styles.navbarBox} ${style.navbarBox}`} sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item , i) => (
-              <Button  className={ `fw-bold fs-5`} onClick={()=> navbarOptions(item)} key={i} sx={{ color: '#fff' }}>
+              <Button   className={ `${styles.topHead} fw-bold fs-5  `} onClick={()=> navbarOptions(item)} key={i} sx={{ color: '#fff' }}>
                 {item}
               </Button>
             ))}

@@ -1,33 +1,48 @@
 import React, { useState } from 'react'
 import styles from "./Pages.module.css"
 import Appbar from "../Components/Navbar/Navbar.jsx";
+import Loader from "../Components/Loader/Loader.jsx"
+
+import axios from 'axios';
 
 
 const PostJob = () => {
   const[company,setCompany] = useState("")
   const[salary,setSalary] = useState("")
-  const[jobType,setJobType] = useState("")
+  const[jobtype,setJobType] = useState("")
   const[position,setPosition] = useState("")
   const[details,setDetails] = useState("")
   const[address,setAddress] = useState("")
+  const [show,setShowLoader] = useState(false)
 
-    const postJobDetails = ()=>{
-      const JobDetails = {
-        company,
-        salary,
-        position,
-        details,
-        address,
-          jobType
-      }
-      console.log(JobDetails)
-      setCompany("")
-      setSalary("")
-      setDetails("")
-      setAddress("")
-      setPosition("")
-      setJobType("")
+
+  const UserJobPost = ()=>{
+    console.log("func is working")
+    const postDetails = {
+      salary,
+      company,
+      jobtype,
+      position,
+      details,
+      address
     }
+    console.log(postDetails)
+    setShowLoader(true)
+  axios({
+    method: "post",
+    url: "http://localhost:8000/api/job/post",
+    data:{
+      ...postDetails
+    }
+  })
+  .then((res)=> {
+      console.log(res)
+      setShowLoader(false)
+  })
+  .catch((err)=> console.log(err))
+  setShowLoader(false)
+
+}
 
   return (
       <>
@@ -35,6 +50,8 @@ const PostJob = () => {
         <div className="container">
           <div className="row">
             <div className="col ">
+            <Loader show ={show ?  'flex' : 'none'} />
+
               <div className={styles.head}>
                 <div className={styles.text}>
                   <h1 className={styles.heading}>Create an employer <br /> account </h1>
@@ -65,7 +82,7 @@ const PostJob = () => {
                 </div>
                 <label className='fw-bold text-center ' htmlFor="">Job Type</label>
                   <div>
-                <input className='mb-4'  value={jobType} onChange={(e)=> setJobType(e.target.value)} type="text" placeholder='Enter Job Type' />
+                <input className='mb-4'  value={jobtype} onChange={(e)=> setJobType(e.target.value)} type="text" placeholder='Enter Job Type' />
                 </div>
                 <label className='fw-bold text-center ' htmlFor="">Salary</label>
                   <div>
@@ -79,7 +96,7 @@ const PostJob = () => {
                   <div>
                 <input className='mb-4' value={address} onChange={(e)=> setAddress(e.target.value)} type="text" placeholder='ENTER ADDRESS' />
                 </div>  
-                <button className=' btn fw-bold    fs-4 btn-success w-100' onClick={postJobDetails}>Post Job</button>
+                <button className=' btn fw-bold    fs-4 btn-success w-100' onClick={UserJobPost}>Post Job</button>
                   </div>
                   </div>
             </div>
