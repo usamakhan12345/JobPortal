@@ -18,13 +18,16 @@ const PostJob = () => {
 
   const UserJobPost = ()=>{
     console.log("func is working")
+    const owner = JSON.parse(localStorage.getItem('id'))
+
     const postDetails = {
       salary,
       company,
       jobtype,
       position,
       details,
-      address
+      address,
+      owner
     }
     console.log(postDetails)
     setShowLoader(true)

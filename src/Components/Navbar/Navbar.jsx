@@ -31,8 +31,12 @@ export default function DrawerAppBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-  const UserLogOut = ()=>{
-      redirect("/")
+  const UserLogOut = (data)=>{
+    console.log(data)
+      if(data === 'logout'){
+        localStorage.removeItem('token')
+        redirect('/')
+      }
   }
 
   const navbarOptions = (item)=>{
@@ -47,7 +51,6 @@ export default function DrawerAppBar(props) {
         redirect('/profile')
       }
   }
-    {console.log(props.head)}
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography  variant="h6" sx={{ my: 2 }}>
@@ -115,7 +118,7 @@ export default function DrawerAppBar(props) {
             sx={{  display: { xs: 'none', sm: 'block' }}}
             
             >
-              <button onClick={()=>UserLogOut()}>{props.login}</button>
+              <button onClick={()=>UserLogOut(props.login)}>{props.login}</button>
           </Typography>
         </Toolbar>
       </AppBar>

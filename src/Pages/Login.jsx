@@ -28,6 +28,9 @@ const Login = () => {
     })
     .then((res)=> {
         console.log(res)
+        console.log(res.data.token)
+        localStorage.setItem('token',JSON.stringify(res.data.token))
+        localStorage.setItem('id',JSON.stringify(res.data.id))
         redirect('/profile')
     })
     .catch((err)=> console.log(err))

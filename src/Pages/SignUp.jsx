@@ -7,7 +7,6 @@ import {BsFillTelephoneFill} from "react-icons/bs"
 import {FaUserAlt} from 'react-icons/fa'
 import {IoMdMail} from "react-icons/io"
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import axios from 'axios' ; 
 import {usersignup} from "../Slices/SignUpSlice.jsx"
 
@@ -18,7 +17,6 @@ const Login = () => {
   const[password,setPassword] = useState("")
   const redirect = useNavigate()
 
-  const dispatch = useDispatch()
   const signDetails = {
     name,
     email,
@@ -42,7 +40,9 @@ const Login = () => {
     .catch((err)=> console.log(err))
   }
   
-
+  const gotoLogin = ()=>{
+    redirect('/')
+  }
   
   return (
     <>

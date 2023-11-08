@@ -8,18 +8,27 @@ import { useEffect , useState } from "react";
 import axios from "axios";
 import React from 'react'
 import Loader from "../Components/Loader/Loader.jsx"
+import { useContext } from "react";
+import userToken from "../Context/Token.jsx";
 
 const AllJobs = () => {
 
   const [alljobs, setAlljobs] = useState([])
   const [show,setShowLoader] = useState(true)
-useEffect(()=>{
+  const [token,setToken] = useState("")
+  const usertoken = useContext(userToken)
+  
+  
+  useEffect(()=>{
+    setToken(usertoken)
+
     axios({
         method: "get",
         url: "http://localhost:8000/api/job/alljobs",
        
       })
       .then((res)=> {
+        console.log(res)
         setAlljobs(res.data.allJobs)
         console.log(res.data.allJobs)
         setShowLoader(false)
@@ -30,7 +39,7 @@ useEffect(()=>{
 },[])
   return (
     <>
-    <Appbar head = {'All Jobs'} login={"Login"} postjob = {"Post Job"} />
+    <Appbar head = {'All Jobs'} login={token ? 'logout' : 'login'} postjob = {"Post Job"} />
     <div className="container">
       <div className="row">
         <Loader show ={show ?  'flex' : 'none'} />

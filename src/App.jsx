@@ -5,14 +5,22 @@ import AllJobs from "./Pages/Alljobs";
 import MyJobs from "./Pages/Myjob";
 import PostJob from "./Pages/PostJob";
 import Profile from "./Pages/Profile";
-import { Provider } from "react-redux";
-import {store} from "./Store/Store.jsx"
+
+import {  useEffect, useState } from "react";
+import Usertoken from "./Context/Token.jsx"
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
+  const[token , setToken] = useState("")
+  useEffect(()=>{
+
+    const usertoken = JSON.parse(localStorage.getItem('token'))
+    setToken(usertoken)
+  },[])
   return (
     <>
-     <Provider store={store}>
+      <Usertoken.Provider value={{token,setToken}}>
+
       <BrowserRouter>
         <Routes>
 
@@ -27,7 +35,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
-          </Provider>
+      </Usertoken.Provider>
     </>
   );
 }
