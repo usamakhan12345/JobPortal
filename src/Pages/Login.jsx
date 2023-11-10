@@ -19,6 +19,7 @@ const Login = () => {
     password
   }
   const Userlogin = ()=>{
+    console.log(loginDetails)
     axios({
       method: "post",
       url: "http://localhost:8000/api/user/login",

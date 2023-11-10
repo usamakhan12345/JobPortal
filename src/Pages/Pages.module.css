@@ -183,7 +183,7 @@ input{
 }
 /* // all jobs page css */
 .jobs{
-    height: 300px;
+    height: 350px;
     background-color: #effff1;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -199,6 +199,17 @@ input{
     display: inline-block;
     padding:  5px 15px;
 }
+.deleteBtn  , .updatejobBtn {
+    background-color: red;
+    font-weight: 700;
+    color: whitesmoke;
+    font-size: 17px;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+.updatejobBtn{
+    background-color: green;
+}
 .salary{
     /* padding:  5px 5px; */
     width: 100%;
@@ -206,9 +217,9 @@ input{
 }
 .timestamp{
     position: absolute;
-    bottom: 18px;
+    bottom: 58px;
     font-weight:  bold;
-    left: 15px;
+    left: 35px;
 }
 .jobHead{
     color: #63189d;

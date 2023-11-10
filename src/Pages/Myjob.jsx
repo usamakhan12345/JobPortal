@@ -10,27 +10,34 @@ import React from 'react'
 import Loader from "../Components/Loader/Loader.jsx"
 import { useContext } from "react";
 import userToken from "../Context/Token.jsx";
-
+import Modal from "../Components/Modal/Modal.jsx"
 const Myjobs = () => {
 
   const [myjobs, setMyjobs] = useState([])
   const [show,setShowLoader] = useState(true)
   const [token,setToken] = useState("")
+  const [userID,setUserId] = useState("")
+  const [open,setOpen] = useState("")
+  const [updateJob,setUpdateJob] = useState({})
   const usertoken = useContext(userToken)
   
-  const userId = JSON.parse(localStorage.getItem('id'))
-  
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   useEffect(()=>{
+    const userId = JSON.parse(localStorage.getItem('id'))
     setToken(usertoken)
-
+    setUserId(userId)
+    console.log(userID)
+    console.log(usertoken.token)
     axios({
       method: "post",
       url: "http://localhost:8000/api/job/myjobs",
       data:{
-       userId
+        userID
       }
     })
     .then((res)=> {
+      console.log(res.data.myjobs[0]._id)
         console.log(res.data.myjobs)
         setMyjobs(res.data.myjobs)
         setShowLoader(false)
@@ -43,12 +50,58 @@ const Myjobs = () => {
     } 
       )
 
-},[])
+},[userID , usertoken , open])
+
+const deleteJob =async   (jobId)=>{
+  console.log('delete job ID' , jobId)
+
+  await axios({
+    method: "delete",
+    url: `http://localhost:8000/api/job/deletejob/${jobId}`,
+  
+  })
+  .then((res)=> {
+    console.log(res.data.deleteUser._id)
+    console.log(res)
+    setMyjobs((prev)=> prev.filter((job) => job._id !== res.data.deleteUser._id ))
+   
+  })
+  .catch((err)=>{
+
+    
+    console.log(err)
+  } 
+    )
+}
+const UpdateJob = async (jobId)=>{
+  console.log(jobId)
+
+  handleOpen()
+  
+  await axios({
+    method: "get",
+    url: `http://localhost:8000/api/job/singlejob/${jobId}`,
+  
+    
+  })
+  .then((res)=> {
+    console.log(res.data.jobforUpdate)
+    setUpdateJob(res.data.jobforUpdate)
+   
+  })
+  .catch((err)=>{
+
+    
+    console.log(err)
+  } 
+    )
+}
   return (
     <>
     <Appbar head = {'My Jobs'} login={token ? 'logout' : 'login'} postjob = {"Post Job"} />
     <div className="container">
       <div className="row">
+        <Modal updateJob = {updateJob} open={open} handleClose ={handleClose}/>
         <Loader show ={show ?  'flex' : 'none'} />
       {myjobs.map((job,index)=>(
             <div key={index} className="col-12 col-sm-12 col-md-6 col-lg-4 mb-3">
@@ -68,6 +121,10 @@ const Myjobs = () => {
                 </div>
   
                 <div><h5 className={`${styles.timestamp}`}>just posted </h5></div>
+                <div className="mt-5 mx-4">
+                  <button onClick={()=>deleteJob(myjobs[index ]._id)} className={styles.deleteBtn}>Delete</button>
+                  <button onClick={()=>UpdateJob(myjobs[index ]._id)}  className={`${styles.updatejobBtn} bg-success`}>Update</button>
+                </div>
             </div>
           </div>
       ))}

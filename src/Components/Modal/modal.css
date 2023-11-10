@@ -1,0 +1,16 @@
+.modalBox{
+    overflow-x: scroll;
+    
+}
+.modalBox > input {
+    width: "100%";
+}
+@media screen and (min-width: 700px) {
+    .modalInput {
+      width: 100%;
+    }
+    
+    .modalBox {
+      width: 100%;
+    }
+  }
