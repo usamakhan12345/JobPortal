@@ -6,14 +6,25 @@ import { RiLockPasswordFill} from "react-icons/ri"
 import { useNavigate } from "react-router-dom";
 import {IoMdMail} from "react-icons/io"
 import axios from "axios";
-import { useState } from "react";
+import { useState , useMemo } from "react";
+import {Toast , notify} from "../Components/Toast/Toast.jsx"
+import { useForkRef } from "@mui/material";
 
 
 const Login = () => {
   const[email,setEmail] = useState("")
   const[password,setPassword] = useState("")
-
+  const[userRedirect,setUserRedirect] = useState(false)
   const redirect = useNavigate()
+
+
+  setTimeout(() => {
+    if(userRedirect){
+      redirect('/profile')
+    }
+  }, 1000);
+
+
   const loginDetails = {
     email,
     password
@@ -32,9 +43,17 @@ const Login = () => {
         console.log(res.data.token)
         localStorage.setItem('token',JSON.stringify(res.data.token))
         localStorage.setItem('id',JSON.stringify(res.data.id))
-        redirect('/profile')
+        notify("user login successfuly" , "success")
+      setUserRedirect(true)
+
     })
-    .catch((err)=> console.log(err))
+    .catch((err)=> {
+       console.log(err.response.data.user) 
+      notify(err.response.data.user , 'error')
+      setUserRedirect(false)
+
+    })
+
 
 
   }
@@ -45,6 +64,7 @@ const Login = () => {
     <>
       <div className={styles.login}>
         <Appbar />
+        <Toast />
         <div className="container">
           <div className="row justify-content-center d-flex">
             <div className="col-md-6 ">

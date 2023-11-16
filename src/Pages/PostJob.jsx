@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styles from "./Pages.module.css"
 import Appbar from "../Components/Navbar/Navbar.jsx";
 import Loader from "../Components/Loader/Loader.jsx"
+import {Toast , notify} from "../Components/Toast/Toast.jsx"
+
 
 import axios from 'axios';
 
@@ -41,15 +43,22 @@ const PostJob = () => {
   .then((res)=> {
       console.log(res)
       setShowLoader(false)
+      notify("JOB POST SUCCESSFULY" , "success")
+
   })
-  .catch((err)=> console.log(err))
-  setShowLoader(false)
+  .catch((err)=>{
+      console.log(err)
+    notify("JOB NOT POST" , 'error')
+    setShowLoader(false)
+  })
+
 
 }
 
   return (
       <>
         <Appbar myjob = {'All Jobs'} profile = {'Profile'} />
+        <Toast/>
         <div className="container">
           <div className="row">
             <div className="col ">

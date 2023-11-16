@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import Appbar from "../Components/Navbar/Navbar.jsx";
 import styles from "./Pages.module.css";
 import {AiOutlineMail} from "react-icons/ai"
@@ -9,12 +9,16 @@ import {IoMdMail} from "react-icons/io"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios' ; 
 import {usersignup} from "../Slices/SignUpSlice.jsx"
+import {Toast , notify} from "../Components/Toast/Toast.jsx"
+
 
 const Login = () => {
   const[name,setName] = useState("")
   const[email,setEmail] = useState("")
   const[phone,setPhone] = useState("")
   const[password,setPassword] = useState("")
+  const[userRedirect,setUserRedirect] = useState(false)
+
   const redirect = useNavigate()
 
   const signDetails = {
@@ -23,6 +27,14 @@ const Login = () => {
     phone,
     password
   }
+  console.log(userRedirect)
+  useMemo(()=>{
+    console.log("call back is running")
+      if(userRedirect){
+   
+        redirect('/')
+      } 
+  },[userRedirect])
   const signUpData = ()=>{
       console.log("func is working")
       console.log(signDetails)
@@ -35,10 +47,20 @@ const Login = () => {
     })
     .then((res)=> {
         console.log(res)
-        redirect('/')
+      notify("USER SIGN UP SUCCESSFULY" , "success")
+      setUserRedirect(true)
+      
     })
-    .catch((err)=> console.log(err))
+    .catch((err)=> {
+      notify( err.response.data.err, "error")
+      
+          console.log(err.response.data.err)
+      setUserRedirect(false)
+
+    })
   }
+  console.log("userRedirect" , userRedirect)
+
   
   const gotoLogin = ()=>{
     redirect('/')
@@ -48,6 +70,7 @@ const Login = () => {
     <>
       <div className={styles.login}>
         <Appbar />
+        <Toast/>
         <div className="container">
           <div className="row justify-content-center d-flex">
             <div className="col-md-6 ">

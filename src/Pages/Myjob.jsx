@@ -11,6 +11,7 @@ import Loader from "../Components/Loader/Loader.jsx"
 import { useContext } from "react";
 import userToken from "../Context/Token.jsx";
 import Modal from "../Components/Modal/Modal.jsx"
+
 const Myjobs = () => {
 
   const [myjobs, setMyjobs] = useState([])
@@ -23,6 +24,8 @@ const Myjobs = () => {
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+
   useEffect(()=>{
     const userId = JSON.parse(localStorage.getItem('id'))
     setToken(usertoken)
