@@ -3,8 +3,7 @@ import styles from "./Pages.module.css"
 import Appbar from "../Components/Navbar/Navbar.jsx";
 import Loader from "../Components/Loader/Loader.jsx"
 import {Toast , notify} from "../Components/Toast/Toast.jsx"
-
-
+import moment from 'moment';
 import axios from 'axios';
 
 
@@ -29,7 +28,9 @@ const PostJob = () => {
       position,
       details,
       address,
-      owner
+      owner,
+      postTime : moment().startOf('minute').fromNow()   
+      
     }
     console.log(postDetails)
     setShowLoader(true)

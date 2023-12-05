@@ -11,7 +11,7 @@ import Loader from "../Components/Loader/Loader.jsx"
 import { useContext } from "react";
 import userToken from "../Context/Token.jsx";
 import Modal from "../Components/Modal/Modal.jsx"
-
+import moment from "moment";
 const Myjobs = () => {
 
   const [myjobs, setMyjobs] = useState([])
@@ -123,7 +123,7 @@ const UpdateJob = async (jobId)=>{
                   <IoIosArrowDroprightCircle style={{fontSize : 25 , color : '#63189d'}}/> <h3 className={`fs-6 mt-1 fw-bold`}> <NavLink>Apply Now </NavLink> </h3>
                 </div>
   
-                <div><h5 className={`${styles.timestamp}`}>just posted </h5></div>
+                <div><h5 className={`${styles.timestamp}`}>{moment(job.created_at).format("MMM Do YY")} </h5></div>
                 <div className="mt-5 mx-4">
                   <button onClick={()=>deleteJob(myjobs[index ]._id)} className={styles.deleteBtn}>Delete</button>
                   <button onClick={()=>UpdateJob(myjobs[index ]._id)}  className={`${styles.updatejobBtn} bg-success`}>Update</button>

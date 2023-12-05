@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 const drawerWidth = 240;
 
 export default function DrawerAppBar(props) {
-  const navItems = [ props.postjob , props.myjob , props.profile , props.postJob];
+  const navItems = [ props.postjob , props.myjobs , props.profile , props.postJob];
 
   const redirect = useNavigate()
   const { window } = props;
@@ -49,6 +49,9 @@ export default function DrawerAppBar(props) {
       }
       if(item === 'Profile'){
         redirect('/profile')
+      }
+      if(item === 'My Jobs'){
+        redirect('/myjobs')
       }
   }
   const drawer = (

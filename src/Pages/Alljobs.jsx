@@ -10,6 +10,7 @@ import React from 'react'
 import Loader from "../Components/Loader/Loader.jsx"
 import { useContext } from "react";
 import userToken from "../Context/Token.jsx";
+import moment from "moment";
 
 const AllJobs = () => {
 
@@ -39,7 +40,7 @@ const AllJobs = () => {
 },[])
   return (
     <>
-    <Appbar head = {'All Jobs'} login={token ? 'logout' : 'login'} postjob = {"Post Job"} />
+    <Appbar head = {'All Jobs'} login={token ? 'logout' : 'login'} postjob = {"Post Job"} myjobs = {token &&'My Jobs' } />
     <div className="container">
       <div className="row">
         <Loader show ={show ?  'flex' : 'none'} />
@@ -60,7 +61,8 @@ const AllJobs = () => {
                   <IoIosArrowDroprightCircle style={{fontSize : 25 , color : '#63189d'}}/> <h3 className={`fs-6 mt-1 fw-bold`}> <NavLink>Apply Now </NavLink> </h3>
                 </div>
   
-                <div><h5 className={`${styles.timestamp}`}>just posted </h5></div>
+                {/* <div><h5 className={`${styles.timestamp}`}>{moment(job.created_at).format('ll')}</h5></div> */}
+                <div><h5 className={`${styles.timestamp}`}>{moment(job.created_at).format("MMM Do YY")} </h5></div>
             </div>
           </div>
       ))}

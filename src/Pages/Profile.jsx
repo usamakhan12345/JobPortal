@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useContext, useEffect } from "react";
 import styles from "./Pages.module.css";
 import { AiFillCamera } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
@@ -8,8 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { useRef } from "react";
 import user from "../assets/user.jpg"
 import Appbar from "../Components/Navbar/Navbar";
-
-
+import userToken from '../Context/Token'
 
 
 
@@ -19,7 +18,7 @@ const Profile = () => {
   const[email,setEmail] = useState("")
   const[phone,setPhone] = useState("")
   const[password,setPassword] = useState("")
-
+const [token , setToken] = useState()
 
   const imageInputref = useRef(0);
   const userImage = useRef(0);
@@ -27,6 +26,10 @@ const Profile = () => {
   const uploadImage = () => {
     imageInputref.current.click();
   };
+  const usertoken = useContext(userToken)
+  useEffect(()=>{
+    setToken(usertoken)
+  },[])
   const updateProfile = () => {
     const profileDetails = {
       name,
@@ -44,7 +47,7 @@ const Profile = () => {
   };
   return (
     <>
-      <Appbar myjob={"All Jobs"} postJob={"Post Job"} head={"Profile"} />
+      <Appbar myjob={"All Jobs"} postJob={"Post Job"} head={"Profile"} login={token ? 'logout' : 'login'} />
       <div>
         <div className="d-flex justify-content-center mb-3">
           <div className={` ${styles.imgageDiv}`}>
